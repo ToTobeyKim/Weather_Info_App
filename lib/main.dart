@@ -47,23 +47,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather Info'),
+        title: const Text('Weather Info'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(
+              controller: cityController,
+              decoration: const InputDecoration(
                 labelText: 'Enter City Name',
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-                print('City');
-              },
-              child: Text('Fetch Weather'),
+              onPressed: fetchWeather,
+              child: const Text('Fetch Weather'),
             ),
+            const SizedBox(height: 15),
+            Text('City: $cityName'),
+            Text('Temperature: $temperature °C'),
+            Text('Condition: $weatherCondition'),
           ],
         ),
       ),
