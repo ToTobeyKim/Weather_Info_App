@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,17 +15,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController cityController = TextEditingController();
+  int temperature = 0;
+  String weatherCondition = '';
+  String cityName = '';
+  final List<String> conditions = ["Sunny", "Cloudy", "Rainy"];
+  final Random rand = Random();
+
+  void fetchWeather() {
+    setState(() {
+      cityName = cityController.text;
+      weatherCondition = conditions[rand.nextInt(conditions.length)];
+      temperature = rand.nextInt(30) + 15;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
